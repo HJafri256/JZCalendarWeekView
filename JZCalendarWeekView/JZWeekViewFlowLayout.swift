@@ -30,21 +30,22 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     public var hourGridDivision: JZHourGridDivision!
     var minuteHeight: CGFloat { return hourHeight / 60 }
 
-    open var defaultHourHeight: CGFloat { return 50 }
+    open var defaultHourHeight: CGFloat { return 100 }
     open var defaultRowHeaderWidth: CGFloat { return 42 }
     open var defaultColumnHeaderHeight: CGFloat { return 44 }
     open var defaultHourGridDivision: JZHourGridDivision { return .noneDiv }
     // You can change following constants
     open var defaultGridThickness: CGFloat { return 0.5 }
-    open var defaultCurrentTimeLineHeight: CGFloat { return 10 }
+    open var defaultCurrentTimeLineHeight: CGFloat { return 0 }
     open var defaultAllDayOneLineHeight: CGFloat { return 30 }
     /// Margin for the flowLayout in collectionView
     open var contentsMargin: UIEdgeInsets { return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0) }
     open var itemMargin: UIEdgeInsets { return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1) }
     /// weekview contentSize height
     open var maxSectionHeight: CGFloat {
-        let height = hourHeight * 24 // statement too long for Swift 5 compiler
-        return columnHeaderHeight + height + contentsMargin.top + contentsMargin.bottom + allDayHeaderHeight
+        var height = columnHeaderHeight + hourHeight * 24 + contentsMargin.top
+        height = height + contentsMargin.bottom + allDayHeaderHeight
+        return height
     }
 
     let minOverlayZ = 1000  // Allows for 900 items in a section without z overlap issues
