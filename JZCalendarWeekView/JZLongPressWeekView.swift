@@ -348,11 +348,11 @@ open class JZLongPressWeekView: JZBaseWeekView {
 
     /// Use the event id to check the cell item is the original cell
     private func isOriginalMovingCell(_ cell: UICollectionViewCell) -> Bool {
-        if let cell = cell as? JZLongPressEventCell {
-            return cell.event.id == currentEditingInfo.event.id
-        } else {
+        guard let cell = cell as? JZLongPressEventCell,
+              let movingEvent = currentEditingInfo.event else {
             return false
         }
+        return cell.event.id == movingEvent.id
     }
 
      /*** Because of reusability, we set some cell contentViews to translucent, then when those views are reused, if you don't scroll back
